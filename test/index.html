@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>incomplete</title>
+  <style>
+    .selected {
+      background-color: yellow;
+    }
+  </style>
+  <script src="../dist/mincomplete.min.js"></script>
+  <script>
+    var superbList = ['ace', 'amazing', 'astonishing', 'astounding', 'awe-inspiring', 'awesome', 'badass', 'beautiful', 'bedazzling', 'bee\'s knees', 'best', 'breathtaking', 'brilliant', 'cat\'s meow', 'cat\'s pajamas', 'classy', 'cool', 'dandy', 'dazzling', 'delightful', 'divine', 'doozie', 'epic', 'excellent', 'exceptional', 'exquisite', 'extraordinary', 'fabulous', 'fantastic', 'fantabulous', 'fine', 'finest', 'first-class', 'first-rate', 'flawless', 'funkadelic', 'geometric', 'glorious', 'gnarly', 'good', 'grand', 'great', 'groovy', 'groundbreaking', 'hunky-dory', 'impeccable', 'impressive', 'incredible', 'kickass', 'kryptonian', 'laudable', 'legendary', 'lovely', 'luminous', 'magnificent', 'majestic', 'marvelous', 'mathematical', 'mind-blowing', 'neat', 'outstanding', 'peachy', 'perfect', 'phenomenal', 'pioneering', 'polished', 'posh', 'praiseworthy', 'premium', 'priceless', 'prime', 'primo', 'rad', 'remarkable', 'riveting', 'scrumtrulescent', 'sensational', 'shining', 'slick', 'smashing', 'solid', 'spectacular', 'splendid', 'splendiferous', 'stellar', 'striking', 'stunning', 'stupendous', 'stylish', 'sublime', 'super', 'super-duper', 'super-excellent', 'superb', 'superior', 'supreme', 'sweet', 'swell', 'terrific', 'tiptop', 'top-notch', 'transcendent', 'tremendous', 'ultimate', 'unreal', 'well-made', 'wicked', 'wonderful', 'wondrous', 'world-class'];
+  </script>
+</head>
+
+<body>
+  <div style="background-color:gray; padding:.3em;">
+    <input id="q" type="text" style="width:100%">
+    <div id="results" style="position:fixed"></div>
+  </div>
+</body>
+
+<script>
+  var $results = document.getElementById('results');
+  var $resultsDisplay = $results.style.display;
+  var $q = document.getElementById('q');
+  var selectedClass = 'selected';
+
+  var suggest = mincomplete({
+    input: $q,
+    suggestions: $results,
+    highlightedClass: selectedClass
+  });
+
+  $q.addEventListener('input', debounce(function (e) {
+    var q = e.target.value.trim();
+    if (q === '') {
+      $results.style.display = 'none';
+      return;
+    }
+
+    var matches = superbList.filter(function (str) {
+      if (str.match(q)) {
+        return str;
+      }
+    });
+
+    var max = matches.length;
+    var n = 0;
+    var links = '';
+    for (; n < max; n += 1) {
+      links += '<div>' + matches[n] + '</div>';
+    }
+    q = e.target.value;
+    if (links === '' || q === '') {
+      $results.style.display = 'none';
+      return;
+    }
+    $results.innerHTML = links;
+    $results.style.display = $resultsDisplay;
+
+    // todo: set highlighted
+    $results.firstChild.className = selectedClass;
+  }, 200));
+
+  function debounce(func, wait) {
+    var timeout, result;
+    return function () {
+      var context = this;
+      var args = arguments;
+      var later = function () {
+        timeout = null;
+        result = func.apply(context, args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      return result;
+    };
+  }
+
+</script>
+
+</html>

@@ -1,0 +1,37 @@
+{
+  "name": "mincomplete",
+  "version": "1.0.0",
+  "description": "a very minimal autocomplete typeahead autosuggestion select list highlighter",
+  "files": [
+    "dist",
+    "index.js"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ignore-pattern /dist/ .",
+    "build-mincomplete": "cat index.js | umd mincomplete -c > dist/mincomplete.js",
+    "build-mincomplete-min": "cat dist/mincomplete.js | uglifyjs > dist/mincomplete.min.js",
+    "build": "npm install && mkdir -p dist && rm -rf dist/* && npm run lint && npm run build-mincomplete && npm run build-mincomplete-min",
+    "test": "npm build && echo No automated test, yet. For now, use $ npm run test-browser",
+    "test-browser": "npm run build && open test/index.html"
+  },
+  "keywords": [
+    "autocomplete",
+    "autosuggest",
+    "autosuggestion",
+    "typeahead",
+    "complete",
+    "suggest",
+    "list",
+    "select"
+  ],
+  "author": "Buster Collings <busterc@gmail.com> (https://about.me/buster)",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-config-xo-space": "^0.17.0",
+    "eslint-plugin-json": "^1.2.0",
+    "uglify-js": "^3.1.5",
+    "umd": "^3.0.1"
+  }
+}
