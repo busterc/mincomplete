@@ -1,4 +1,4 @@
-# mincomplete [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
+# mincomplete [![NPM version][npm-image]][npm-url]
 
 > a very minimal autocomplete typeahead autosuggestion select list highlighter
 
@@ -41,5 +41,3 @@ ISC © [Buster Collings](http://about.me/buster)
 
 [npm-image]: https://badge.fury.io/js/mincomplete.svg
 [npm-url]: https://npmjs.org/package/mincomplete
-[travis-image]: https://travis-ci.org/busterc/mincomplete.svg?branch=master
-[travis-url]: https://travis-ci.org/busterc/mincomplete
