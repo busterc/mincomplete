@@ -2,13 +2,13 @@
 
 > a very minimal autocomplete typeahead autosuggestion select list highlighter
 
-## FYI
+### try the [demo](https://rawgit.com/busterc/mincomplete/master/test/index.html)
 
-Since this is a very minimal module (not designed to be robustly extended and configured), I highly recommend using [**Distiller**](https://github.com/busterc/distiller) to grab the dist file(s) and modify them for your use case; or **fork it**.
+![](https://i.imgur.com/Krcvl6j.gif)
 
 ## What it doesn't do
 
-- Populate or modify the DOM Element that contains a list of suggestions.
+- Populate or significantly modify DOM Element that contains a list of suggestions; forcing you to used a baked in filtering algorithm (e.g. fuzzy) and/or presentation format.
 - Provide every possible capability you could ever dream up for such a feature, sticking you with a whole lot of code that you'll never use.
 
 ## What it does
@@ -18,6 +18,12 @@ Listens to an input for `arrow up`, `arrow down`, `tab` and `enter`
 - On `tab` the highlighted item's `innerText` is applied to the `input.value`
 - `Enter` does the same thing as `tab`
 
+## What if you need a bit more functionality
+
+- Create your own, additional, event handlers for `tab` and `enter` outside the scope of mincomplete (e.g. fetch data from a server when hitting `enter`).
+- [**Fork mincomplete**](https://github.com/busterc/mincomplete) and make it your own.
+- Use [**Distiller**](https://github.com/busterc/distiller) to grab the dist file(s) and modify them for your custom use case.
+
 ## Install
 
 ```sh
@@ -26,12 +32,29 @@ $ npm install mincomplete
 
 ## Usage
 
-```js
-var suggest = mincomplete({
-  input: document.querySelector('#search'),
-  suggestions: document.querySelector('#suggestions'),
-  highlightedClass: 'highlighted'
-});
+```html
+// ...
+
+  <style>.highlighted { background-color: yellow; }</style>
+
+</head>
+<body>
+
+  <div>
+    <input id="search" type="text">
+    <div id="suggestions"></div>
+  </div>
+
+  <script>
+    // so easy a caveman can do it
+    mincomplete({
+      input: document.querySelector('#search'),
+      suggestions: document.querySelector('#suggestions'),
+      highlightedClass: 'highlighted'
+    });
+  </script>
+
+// ...
 ```
 
 ## License
