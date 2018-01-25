@@ -1,6 +1,6 @@
 {
   "name": "mincomplete",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a very minimal autocomplete typeahead autosuggestion select list highlighter",
   "files": [
     "dist",
