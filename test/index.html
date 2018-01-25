@@ -19,7 +19,9 @@
 
 <body>
   <div>
-    <input id="q" type="text" style="width:100%">
+    <input id="q" type="text">
+    <label for="h">
+      <input id="h" type="checkbox">highlight 1st result</label>
     <div id="results" style="position:fixed"></div>
   </div>
 </body>
@@ -28,6 +30,7 @@
   var $results = document.getElementById('results');
   var $resultsDisplay = $results.style.display;
   var $q = document.getElementById('q');
+  var $h = document.getElementById('h');
   var selectedClass = 'selected';
 
   mincomplete({
@@ -62,9 +65,7 @@
     }
     $results.innerHTML = links;
     $results.style.display = $resultsDisplay;
-
-    // todo: set highlighted
-    $results.firstChild.className = selectedClass;
+    $results.firstChild.className = $h.checked ? selectedClass : '';
   }, 200));
 
   function debounce(func, wait) {

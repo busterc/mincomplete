@@ -44,14 +44,16 @@ module.exports = function (settings) {
 
   function move(direction, suggestions, highlightedClass, highlightedClassSelector) {
     var lastIndex = suggestions.childNodes.length - 1;
-    var currentSuggestion = suggestions.querySelector(highlightedClassSelector) || suggestions.childNodes[0];
-    currentSuggestion.classList.remove(highlightedClass);
+    var currentSuggestion = suggestions.querySelector(highlightedClassSelector);
     var nextSuggestion;
     if (direction === 'up') {
+      currentSuggestion = currentSuggestion ? currentSuggestion : suggestions.childNodes[0];
       nextSuggestion = currentSuggestion.previousSibling || suggestions.childNodes[lastIndex];
     } else {
+      currentSuggestion = currentSuggestion ? currentSuggestion : suggestions.childNodes[lastIndex];
       nextSuggestion = currentSuggestion.nextSibling || suggestions.childNodes[0];
     }
+    currentSuggestion.classList.remove(highlightedClass);
     nextSuggestion.classList.add(highlightedClass);
   }
 
