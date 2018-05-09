@@ -40,7 +40,7 @@
   });
 
   $q.addEventListener('input', debounce(function (e) {
-    var q = e.target.value.trim();
+    var q = e.target.value.trim().toLowerCase();
     if (q === '') {
       $results.style.display = 'none';
       return;
